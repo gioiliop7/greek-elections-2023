@@ -23,6 +23,11 @@ export default async function handler(
     return;
   }
 
+  if (!type || (type !== 'stats' && type !== 'full')) {
+    res.status(400).json({ error: 'Invalid Request Type' });
+    return;
+  }
+
   const url =
     type === "stats"
       ? "https://ekloges.ypes.gr/current/stat/v/epik_1.js"
