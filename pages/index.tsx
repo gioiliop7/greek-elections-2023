@@ -94,7 +94,7 @@ export default function Home({ data }: ElectionPageProps) {
         parliamentParties.push({
           id: id,
           percent: percent,
-          rank,
+          rank:rank,
           edres: edresCounter,
         });
     }
