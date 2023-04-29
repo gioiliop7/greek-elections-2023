@@ -42,3 +42,13 @@ export interface GeneralData {
   grammenoi: number;
   participation: number;
 }
+
+export type PartyNames = {
+  [id: number]: string;
+  2: string;
+  3: string;
+  4: string;
+  106: string;
+  108: string;
+  122: string;
+}

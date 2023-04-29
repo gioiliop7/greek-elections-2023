@@ -1,6 +1,6 @@
 import { ParliamentParty, GeneralData } from "@/utils/types";
 import { formatPercentage } from "@/utils/formatters";
-import { getPartyLogo } from "@/utils/helpers";
+import { getPartyLogo } from "@/utils/parties";
 import Image from "next/image";
 
 import parliament from "../../assets/images/parliament.svg";
