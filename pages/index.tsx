@@ -1,15 +1,18 @@
-import { Inter } from "next/font/google";
+import { Comfortaa } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+
 import Header from "@/components/Header";
+import Summary from "@/components/Summary/Summary";
 import { Statistics, FullData, Party, ParliamentParty } from "@/utils/types";
 
 import { calculatePercentage } from "@/utils/helpers";
 
 import { GetServerSideProps } from "next";
+
 const dev = process.env.NODE_ENV !== "production";
 const server = dev ? "http://localhost:3000" : process.env.EKLOGES_PUBLIC_URL;
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Comfortaa({ subsets: ["greek"] });
 
 type ElectionStats = object;
 type ElectionFull = object;
@@ -62,6 +65,7 @@ export default function Home({ data }: ElectionPageProps) {
   const full = data.full as FullData;
   const parties = full?.party as Party[];
   const parliamentParties: ParliamentParty[] = [];
+  console.log(statistics);
   //TODO ΕΚΛΟΓΙΚΑ ΤΜΗΜΑΤΑ ΟΤΑΝ ΒΓΕΙ Η ΠΛΑΤΦΟΡΜΑ ΓΙΑΤΙ ΔΕΝ ΚΑΤΑΛΑΒΑΙΝΩ ΤΙΣ ΜΕΤΑΒΛΗΤΕΣ.
   const eklogikaTmhmataCounter = statistics?.CountTm;
   const edresEpikrateias = statistics?.Edres;
@@ -75,7 +79,18 @@ export default function Home({ data }: ElectionPageProps) {
   const percentageOfAkyra = calculatePercentage(akyra, participation);
   const percentageOfLeyka = calculatePercentage(leyka, participation);
   const percentageOfEgkyra = calculatePercentage(egkyra, participation);
-  console.log(parties);
+  const generalData = {
+    epikrateiaName,
+    percentageOfPartipation,
+    percentageOfAkyra,
+    percentageOfLeyka,
+    percentageOfEgkyra,
+    akyra,
+    leyka,
+    egkyra,
+    grammenoi,
+    participation,
+  };
   parties.forEach(
     (element: {
       Edres: number;
@@ -83,6 +98,7 @@ export default function Home({ data }: ElectionPageProps) {
       PARTY_ID: number;
       Perc: number;
       Rank: number;
+      VOTES: number;
     }) => {
       const edres = element.Edres;
       const edresEpik = element.EdresEpik;
@@ -90,24 +106,27 @@ export default function Home({ data }: ElectionPageProps) {
       const id = element.PARTY_ID;
       const percent = element.Perc;
       const rank = element.Rank;
+      const votes = element.VOTES;
       if (edresCounter > 0)
         parliamentParties.push({
           id: id,
           percent: percent,
-          rank:rank,
+          rank: rank,
           edres: edresCounter,
+          votes: votes,
         });
     }
   );
-  console.log(parliamentParties);
 
   return (
     <>
       <Header />
-      <main className={styles.main}>
+      <main className={`${styles.main} ${inter.className}`}>
         <div className="flex flex-col lg:flex-row w-full">
-          <div className="w-1/4 bg-gray-400 h-screen">1</div>
-          <div className="w-3/4 bg-gray-500 h-screen">2</div>
+          <div className="w-3/5 bg-endeavour-50 h-screen">1</div>
+          <div className="w-2/5 bg-endeavour-100 h-screen">
+            <Summary generalData={generalData} parties={parliamentParties} />
+          </div>
         </div>
       </main>
     </>

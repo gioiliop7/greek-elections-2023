@@ -18,6 +18,7 @@ export type Party = {
   PARTY_ID: number;
   Perc: number;
   Rank: number;
+  VOTES: number;
   // other properties of party object
 };
 
@@ -26,4 +27,18 @@ export interface ParliamentParty {
   percent: number;
   rank: number;
   edres: number;
+  votes: number;
+}
+
+export interface GeneralData {
+  epikrateiaName: string;
+  percentageOfPartipation: number;
+  percentageOfAkyra: number;
+  percentageOfLeyka: number;
+  percentageOfEgkyra: number;
+  akyra: number;
+  leyka: number;
+  egkyra: number;
+  grammenoi: number;
+  participation: number;
 }
