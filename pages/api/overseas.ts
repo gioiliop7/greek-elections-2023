@@ -13,16 +13,7 @@ export default async function handler(
     return;
   }
 
-  const { id, type } = req.body;
-
-  if (id === undefined) {
-    return res.status(400).json({ error: "Missing ID parameter" });
-  }
-
-  const idNumber = parseInt(id, 10);
-  if (isNaN(idNumber)) {
-    return res.status(400).json({ error: "Invalid ID parameter" });
-  }
+  const { type } = req.body;
 
   if (!type) {
     res.status(400).json({ error: "Missing Request Type" });
@@ -36,8 +27,9 @@ export default async function handler(
 
   const url =
     type === "stats"
-      ? `https://ekloges.ypes.gr/current/stat/v/ep_${idNumber}.js`
-      : `https://ekloges.ypes.gr/current/dyn/v/ep_${idNumber}.js`;
+      ? `https://ekloges.ypes.gr/current/stat/v/ep_57.js`
+      : `
+      https://ekloges.ypes.gr/current/dyn/v/ep_57.js`;
 
   try {
     const response = await fetch(url);

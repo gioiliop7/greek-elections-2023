@@ -36,8 +36,8 @@ export default async function handler(
 
   const url =
     type === "stats"
-      ? `https://ekloges.ypes.gr/current/stat/v/ep_${idNumber}.js`
-      : `https://ekloges.ypes.gr/current/dyn/v/ep_${idNumber}.js`;
+      ? `https://ekloges.ypes.gr/current/stat/v/country_${idNumber}.js`
+      : `https://ekloges.ypes.gr/current/dyn/v/country_${idNumber}.js`;
 
   try {
     const response = await fetch(url);
@@ -45,6 +45,10 @@ export default async function handler(
       return res.status(404).json({ error: "Not Found" });
     }
     const data = await response.json();
+    if (data.length == 0) {
+      res.status(500).json({ error: "Data Not found" });
+      return
+    }
     res.status(200).json(data);
   } catch (error) {
     console.error(error);

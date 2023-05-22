@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { RequestType } from "@/utils/types";
 
 interface ErrorResponse {
   error: string;
   status?: number;
 }
-
-type RequestType = "stats" | "full";
 
 export default async function handler(
   req: NextApiRequest,

@@ -13,7 +13,7 @@ export default async function handler(
     return;
   }
 
-  const { id, type } = req.body;
+  const { id, party } = req.body;
 
   if (id === undefined) {
     return res.status(400).json({ error: "Missing ID parameter" });
@@ -24,20 +24,7 @@ export default async function handler(
     return res.status(400).json({ error: "Invalid ID parameter" });
   }
 
-  if (!type) {
-    res.status(400).json({ error: "Missing Request Type" });
-    return;
-  }
-
-  if (!type || (type !== "stats" && type !== "full")) {
-    res.status(400).json({ error: "Invalid Request Type" });
-    return;
-  }
-
-  const url =
-    type === "stats"
-      ? `https://ekloges.ypes.gr/current/stat/v/ep_${idNumber}.js`
-      : `https://ekloges.ypes.gr/current/dyn/v/ep_${idNumber}.js`;
+  const url = `https://ekloges.ypes.gr/current/dyn/v/ep_vc_${idNumber}.js`;
 
   try {
     const response = await fetch(url);
@@ -45,6 +32,10 @@ export default async function handler(
       return res.status(404).json({ error: "Not Found" });
     }
     const data = await response.json();
+    if (party) {
+      res.status(200).json(data.party["2"]);
+      return;
+    }
     res.status(200).json(data);
   } catch (error) {
     console.error(error);

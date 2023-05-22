@@ -52,3 +52,5 @@ export type PartyNames = {
   108: string;
   122: string;
 }
+
+export type RequestType = "stats" | "full";
