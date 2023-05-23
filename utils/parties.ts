@@ -18,7 +18,7 @@ import enono from "../assets/images/enono.png";
 import enosi_kentroon from "../assets/images/enosi_kentroon.svg";
 import esy from "../assets/images/esy.png";
 import kinima21 from "../assets/images/kinima21.png";
-import kommounistiko from "../assets/images/kommounistiko.png";
+import kommounistiko from "../assets/images/komounistiko.png";
 import kotes from "../assets/images/kotes.png";
 import krama from "../assets/images/krama.png";
 import mlkkke from "../assets/images/mlkkke.png";
