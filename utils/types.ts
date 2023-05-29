@@ -83,3 +83,19 @@ export type PartyNames = {
 };
 
 export type RequestType = "stats" | "full";
+
+export type ElectionStats = object;
+export type ElectionFull = object;
+export type ElectionNet = object;
+
+export type ElectionData = {
+  stats: ElectionStats | null;
+  full: ElectionFull | null;
+  deputies: ElectionNet | null;
+  ep?: String | undefined;
+  deputiesVotes?: object | null;
+};
+
+export interface SelectProps {
+  ep: number;
+}

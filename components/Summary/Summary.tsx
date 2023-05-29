@@ -12,9 +12,7 @@ export default function Summary({
   parties: ParliamentParty[];
   generalData: GeneralData;
 }) {
-  console.log(generalData);
   const partyElements = parties.map((party) => (
-    <>
       <div
         className="md:w-2/6 px-4 py-3 text-center rounded-xl bg-white"
         key={party.id}
@@ -29,13 +27,12 @@ export default function Summary({
           alt={`${party.id}`}
         />
       </div>
-    </>
   ));
   return (
     <>
-      <h2 className="text-2xl text-endeavour-700 text-center p-5">
+      {/* <h2 className="text-2xl text-endeavour-700 text-center p-5">
         Greek Elections 2023
-      </h2>
+      </h2> */}
       <hr className="mb-2 border-endeavour-700" />
       <div className="px-5 py-2">
         <h2 className="text-2xl font-bold text-endeavour-700 text-center">
