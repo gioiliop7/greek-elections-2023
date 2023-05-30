@@ -10,6 +10,8 @@ export type FullData = {
   Leyka: number;
   Gramenoi: number;
   party: Party[];
+  NumTm: number;
+  Updated: string;
 };
 
 export type Party = {
@@ -99,3 +101,8 @@ export type ElectionData = {
 export interface SelectProps {
   ep: number;
 }
+
+export type District = {
+  id: number;
+  name: string;
+};

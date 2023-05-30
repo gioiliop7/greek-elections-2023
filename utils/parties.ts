@@ -156,3 +156,26 @@ export function getPartyName(id: number) {
   };
   return partyNames[id] || "";
 }
+
+export function getPartyColor(id: number) {
+  switch (id) {
+    case 2:
+      return "#1a5cc6";
+    case 4:
+      return "#d4262d";
+    case 106:
+      return "#017d3e";
+    case 3:
+      return "#e30200";
+    case 108:
+      return "#87c2d5";
+    case 122:
+      return "#e74026";
+    case 131:
+      return "#c15127";
+    case 123:
+      return "#ad2e89";
+    default:
+      break;
+  }
+}

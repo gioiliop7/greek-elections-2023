@@ -1,19 +1,30 @@
 import React from "react";
+import dynamic from "next/dynamic";
+import { ElectionData, FullData, Statistics } from "@/utils/types";
+
+const Percentage = dynamic(() => import("../Percentage/Percentage"), {
+  ssr: false,
+});
 
 export default function BlueBar({
   ep,
   setEp,
   name,
+  data,
 }: {
   ep: number;
   name: String;
   setEp: React.Dispatch<React.SetStateAction<number>>;
   setEpName: React.Dispatch<React.SetStateAction<string>>;
+  data: ElectionData;
 }) {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEp = parseInt(event.target.value);
     setEp(selectedEp);
   };
+  const full = data.full as FullData;
+  const updatedAt = full.Updated;
+
   return (
     <>
       <div className="w-full bg-[#0055a0] text-white  h-100 flex justify-between p-5">
@@ -86,8 +97,14 @@ export default function BlueBar({
           <option value="57">Εξωτερικού</option>
         </select>
       </div>
-      <div className="w-full bg-white text-[#0055a0] h-100 flex justify-between p-5">
-        <p className="text-2xl font-bold">{name}</p>
+      <div className="w-full bg-white border-b-blue-950 border text-[#0055a0] h-100 flex justify-between p-5">
+        <div>
+          <p className="text-2xl font-black my-3">{name}</p>
+          <h4 className="text-md">Τελευταία ενημέρωση</h4>
+          <p className="text-sm font-bold">{updatedAt}</p>
+        </div>
+
+        <Percentage data={data} />
       </div>
     </>
   );

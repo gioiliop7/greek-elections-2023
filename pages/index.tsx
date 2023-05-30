@@ -100,7 +100,8 @@ export default function Home({ data }: ElectionPageProps) {
       const data = await fetchData(ep);
       const stats = data.stats as Statistics;
       const name = stats.Descr;
-      setEpName(name)
+      setEpName(name);
+      setInitialData(data);
     };
 
     fetchDataAsync();
@@ -117,8 +118,11 @@ export default function Home({ data }: ElectionPageProps) {
               setEp={setEp}
               setEpName={setEpName}
               name={epName}
+              data={initialData} 
             />
-            <DataComponent data={initialData} />
+            <div className="overflow-y-auto h-[75%] py-12">
+              <DataComponent data={initialData} />
+            </div>
           </div>
           <div className="w-2/5 bg-endeavour-100 h-screen">
             <Summary generalData={generalData} parties={parliamentParties} />
