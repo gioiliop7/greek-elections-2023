@@ -186,7 +186,7 @@ export default function Table({ data }: TableProps) {
                 >
                   <td
                     className={`${
-                      deputy.seat ? "font-black" : ""
+                      deputy.seat ? "font-bold" : ""
                     } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800`}
                   >
                     {deputy.cand_TvDescr}

@@ -28,7 +28,7 @@ export default function BlueBar({
   return (
     <>
       <div className="w-full bg-[#0055a0] text-white  h-100 flex justify-between p-5">
-        <h2 className="text-2xl font-bold text-white">Εκλογές 2023</h2>
+        <h2 className="text-2xl font-medium text-white">Εκλογές 2023</h2>
         <select
           onChange={handleSelectChange}
           value={ep}
@@ -99,7 +99,7 @@ export default function BlueBar({
       </div>
       <div className="w-full bg-white border-b-blue-950 border text-[#0055a0] h-100 flex justify-between p-5">
         <div>
-          <p className="text-2xl font-black my-3">{name}</p>
+          <p className="text-2xl font-medium my-3">{name}</p>
           <h4 className="text-md">Τελευταία ενημέρωση</h4>
           <p className="text-sm font-bold">{updatedAt}</p>
         </div>

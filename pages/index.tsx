@@ -1,4 +1,3 @@
-import { Comfortaa } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
 import Header from "@/components/Header/Header";
@@ -19,8 +18,6 @@ import {
 
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-
-const inter = Comfortaa({ subsets: ["greek"] });
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetchData();
@@ -110,7 +107,7 @@ export default function Home({ data }: ElectionPageProps) {
   return (
     <>
       <Header />
-      <main className={`${styles.main} ${inter.className}`}>
+      <div>
         <div className="flex flex-col lg:flex-row w-full">
           <div className="w-3/5 bg-endeavour-50 h-screen">
             <BlueBar
@@ -128,7 +125,7 @@ export default function Home({ data }: ElectionPageProps) {
             <Summary generalData={generalData} parties={parliamentParties} />
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

@@ -17,8 +17,8 @@ export default function Summary({
         className="md:w-2/6 px-4 py-3 text-center rounded-xl bg-white"
         key={party.id}
       >
-        <p className="text-endeavour-950 text-2xl font-bold">{party.edres}</p>
-        <p className="text-endeavour-950 font-bold">
+        <p className="text-endeavour-950 text-2xl font-medium">{party.edres}</p>
+        <p className="text-endeavour-950 font-medium">
           {formatPercentage(party.percent)} - {party.votes}
         </p>
         <Image
