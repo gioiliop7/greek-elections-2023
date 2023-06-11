@@ -1,6 +1,5 @@
 const dev = process.env.NODE_ENV !== "production";
-const server = dev ? "http://localhost:3000" : process.env.EKLOGES_PUBLIC_URL;
-console.log(server)
+const server = dev ? "http://localhost:3000" : "https://greek-elections-2023.vercel.app";
 import { ElectionData } from "./types";
 
 export const fetchData = async (ep = 99999): Promise<ElectionData> => {
