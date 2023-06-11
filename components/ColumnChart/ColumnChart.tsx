@@ -49,8 +49,9 @@ function ColumnChart({ data, countries }: ElectionPageProps) {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "80%",
+        columnWidth: "90%",
         endingShape: "rounded",
+        borderRadius:8
       },
     },
     dataLabels: {

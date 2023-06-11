@@ -42,11 +42,13 @@ function PieChart({ data }: ElectionPageProps) {
                 // By default, this function returns the average of all series. The below is just an example to show the use of a custom formatter function
                 return participation;
               },
+              color: '#373d3f',
             },
           },
         },
       },
       labels: ['Άκυρα', 'Λευκά', 'Έγκυρα'],
+      colors: ['#002b24', '#077368', '#62beb6',], // Add colors here
     });
   
     return (

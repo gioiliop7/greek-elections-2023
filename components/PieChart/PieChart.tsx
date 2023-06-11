@@ -22,15 +22,17 @@ function PieChart({ data }: ElectionPageProps) {
       type: 'pie',
     },
     labels: ['Συμμετοχή','Αποχή'],
+    colors: ['#111539', '#97A1D9'],
+    legend: {
+      show: true,
+      position:'bottom'
+    },
     responsive: [
       {
         breakpoint: 480,
         options: {
           chart: {
             width: 200,
-          },
-          legend: {
-            position: 'bottom',
           },
         },
       },

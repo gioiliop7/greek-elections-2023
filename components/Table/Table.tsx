@@ -132,13 +132,13 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               className="px-2 py-1 rounded-md bg-gray-200 text-gray-800"
             />
           </div>
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
             {/* Table headers */}
-            <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase">
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
+                  className="px-6 py-3 bg-gray-50"
                 >
                   Ονοματεπώνυμο
                 </th>
@@ -147,7 +147,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
+                  className="px-6 py-3 bg-gray-50"
                 >
                   Συνδυασμός
                 </th>
@@ -173,17 +173,17 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               {currentDeputies.map((deputy, index) => (
                 <tr
                   key={index}
-                  className="border-b border-gray-200 dark:border-gray-700"
+                  className="border-b border-gray-200"
                 >
                   <td
                     className={`${
                       deputy.seat ? "font-bold" : ""
-                    } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800`}
+                    } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50`}
                   >
                     {deputy.cand_TvDescr}
                   </td>
                   <td className="px-6 py-4">{getDistrictName(parseInt(deputy.EP_ID))}</td>
-                  <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                  <td className="px-6 py-4 bg-gray-50">
                     <Image
                       className="max-w-[40px] mx-auto"
                       src={getPartyLogo(deputy.PARTY_ID)}

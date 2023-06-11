@@ -18,7 +18,7 @@ export default function Summary({
     othersPercent = othersPercent - party.percent;
     return (
       <div
-        className="w-[60%] sm:w-2/6 sm:px-4 sm:py-3 text-center rounded-xl bg-white"
+        className="w-[60%] sm:w-2/6 sm:px-4 sm:py-3  h-[150px] flex justify-center flex-col text-center rounded-xl bg-white"
         key={party.id}
       >
         <p className="text-endeavour-950 text-2xl font-medium">{party.edres}</p>
@@ -71,7 +71,7 @@ export default function Summary({
         />
         <div className="flex gap-5 justify-center flex-wrap px-10 sm:px-0">
           {partyElements}
-          <div className="w-[60%] sm:w-2/6 px-4 py-3 text-center rounded-xl bg-white">
+          <div className="w-[60%] sm:w-2/6 px-4 py-3 h-[150px] flex justify-center flex-col text-center  rounded-xl bg-white">
             <p className="text-endeavour-950 text-2xl font-medium">0</p>
             <p className="text-endeavour-950 font-medium">
               {formatPercentage(othersPercent)}
