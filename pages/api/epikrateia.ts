@@ -35,11 +35,14 @@ export default async function handler(
   try {
     const requestOptions = {
       headers: {
+        authority: "ekloges.ypes.gr",
         accept: "application/json, text/plain, */*",
         "accept-language": "el-GR,el;q=0.9,en;q=0.8",
+        "cache-control": "no-cache",
+        referer: "https://ekloges.ypes.gr/current/v/home/",
       },
     };
-    const response = await fetch(url,requestOptions);
+    const response = await fetch(url, requestOptions);
     console.log(response);
     const data = await response.json();
     res.status(200).json(data);
