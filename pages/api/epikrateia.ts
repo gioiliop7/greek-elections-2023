@@ -55,7 +55,8 @@ export default async function handler(
     };
     const response = await fetch(url, requestOptions);
     console.log(response);
-    const data = await response.json();
+    const data = await response.text();
+    console.log(data);
     res.status(200).json(data);
   } catch (error: unknown) {
     console.log(error);
