@@ -123,7 +123,7 @@ export default function Home({ data }: ElectionPageProps) {
       <Header />
       <div>
         <div className="flex flex-col lg:flex-row w-full">
-          <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-screen">
+          <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-[110vh]">
             <BlueBar
               ep={ep}
               setEp={setEp}
@@ -139,7 +139,7 @@ export default function Home({ data }: ElectionPageProps) {
               <DataComponent data={initialData} countries={countries} />
             </div>
           </div>
-          <div className="w-full lg:w-2/5 bg-endeavour-100 lg:h-screen py-0 sm:py-10">
+          <div className="w-full lg:w-2/5 bg-endeavour-100 lg:min-h-screen py-0 sm:py-5">
             <Summary generalData={generalData} parties={parliamentParties} />
           </div>
         </div>
