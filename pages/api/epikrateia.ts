@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { RequestType } from "@/utils/types";
+import { requestOptions } from "@/utils/fetchdata";
 
 interface ErrorResponse {
   error: string;
@@ -33,24 +34,8 @@ export default async function handler(
       : "https://ekloges.ypes.gr/current/dyn1/v/epik_1.js";
 
   try {
-    const requestOptions = {
-      headers: {
-        authority: "ekloges.ypes.gr",
-        origin: "https://ekloges.ypes.gr",
-        accept: "application/json, text/plain, */*",
-        "accept-language": "el-GR,el;q=0.9,en;q=0.8",
-        "cache-control": "no-cache",
-        pragma: "no-cache",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
-      },
-    };
     const response = await fetch(url, requestOptions);
-    console.log(response);
-    const data = await response.text();
-    console.log(data);
+    const data = await response.json();
     res.status(200).json(data);
   } catch (error: unknown) {
     console.log(error);

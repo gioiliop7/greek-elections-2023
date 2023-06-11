@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { requestOptions } from "@/utils/fetchdata";
 
 type Data = {
   error: string;
@@ -27,7 +28,7 @@ export default async function handler(
   const url = `https://ekloges.ypes.gr/current/stat/v/cd_${idNumber}.js`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,requestOptions);
     if (!response.ok) {
       return res.status(404).json({ error: "Not Found" });
     }

@@ -1,3 +1,4 @@
+import { requestOptions } from "@/utils/fetchdata";
 import { NextApiRequest, NextApiResponse } from "next";
 
 interface ErrorResponse {
@@ -17,7 +18,7 @@ export default async function handler(
   const url = "https://ekloges.ypes.gr/current/dyn/v/300.js";
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,requestOptions);
     const data = await response.json();
     res.status(200).json(data);
   } catch (error: unknown) {

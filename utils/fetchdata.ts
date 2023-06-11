@@ -63,3 +63,18 @@ export const fetchCountries = async (country = 57): Promise<ElectionData> => {
   const deputiesVotes = null;
   return { deputies, stats, full, deputiesVotes };
 };
+
+export const requestOptions = {
+  headers: {
+    authority: "ekloges.ypes.gr",
+    origin: "https://ekloges.ypes.gr",
+    accept: "application/json, text/plain, */*",
+    "accept-language": "el-GR,el;q=0.9,en;q=0.8",
+    "cache-control": "no-cache",
+    pragma: "no-cache",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "user-agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+  },
+};

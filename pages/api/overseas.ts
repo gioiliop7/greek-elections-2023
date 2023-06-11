@@ -1,3 +1,4 @@
+import { requestOptions } from "@/utils/fetchdata";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -32,7 +33,7 @@ export default async function handler(
       https://ekloges.ypes.gr/current/dyn/v/ep_57.js`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,requestOptions);
     if (!response.ok) {
       return res.status(404).json({ error: "Not Found" });
     }
