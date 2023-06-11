@@ -19,14 +19,15 @@ type ElectionPageProps = {
 
 function ColumnChart({ data, countries }: ElectionPageProps) {
   const full = data.full as FullData;
+  const text = countries ? "Ψήφοι" : "%";
   const parties = full.party;
   let chartData;
   if (!countries) {
     chartData = parties
-      .filter((party: PartyType) => party.Edres > 0)
+      .filter((party: PartyType) => party.Perc > 2.5)
       .map((party: PartyType) => ({
         name: getPartyName(party.PARTY_ID),
-        data: [(formatPercentage(party.Perc)) as any],
+        data: [formatPercentage(party.Perc) as any],
         color: getPartyColor(party.PARTY_ID),
       }));
   } else {
@@ -51,7 +52,7 @@ function ColumnChart({ data, countries }: ElectionPageProps) {
         horizontal: false,
         columnWidth: "90%",
         endingShape: "rounded",
-        borderRadius:8
+        borderRadius: 8,
       },
     },
     dataLabels: {
@@ -67,7 +68,7 @@ function ColumnChart({ data, countries }: ElectionPageProps) {
     },
     yaxis: {
       title: {
-        text: "%",
+        text: text,
       },
     },
     fill: {
@@ -75,20 +76,36 @@ function ColumnChart({ data, countries }: ElectionPageProps) {
     },
     tooltip: {
       y: {
-        formatter: (val: number) => `${val}%`,
+        formatter: (val: number) => {
+          if (countries) {
+            return `${val} Ψήφοι`;
+          } else {
+            return `${val}%`;
+          }
+        },
       },
     },
   });
 
   return (
-    <div id="chart">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={550}
-      />
-    </div>
+    <>
+      {!countries && (
+        <>
+          <p className="text-center mb-6">
+            Το διάγραμμα παρακάτω απεικονίζει τα κόμματα με ποσοστό μεγαλύτερο
+            του 2.5
+          </p>
+        </>
+      )}
+      <div id="chart">
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="bar"
+          height={550}
+        />
+      </div>
+    </>
   );
 }
 
