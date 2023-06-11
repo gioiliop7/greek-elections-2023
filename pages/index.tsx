@@ -93,14 +93,7 @@ export default function Home({ data }: ElectionPageProps) {
         });
     }
   );
-
-  // console.log(countries);
-  // console.log(countryID);
-  // console.log(ep);
-
   useEffect(() => {
-    console.log(ep);
-    console.log(countryID);
 
     const fetchDataAsync = async () => {
       try {
@@ -124,17 +117,6 @@ export default function Home({ data }: ElectionPageProps) {
 
     fetchDataAsync();
   }, [ep, countryID]);
-
-  // useEffect(() => {
-  //   if (countryID !== 0) {
-  //     console.log("running c");
-
-  //   } else {
-  //     return;
-  //   }
-  // }, [countryID, ep]);
-
-  console.log(initialData);
 
   return (
     <>

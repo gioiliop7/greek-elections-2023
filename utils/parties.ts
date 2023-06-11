@@ -227,6 +227,12 @@ export function getPartyColor(id: number) {
       return "#000";
     case 998:
       return "#000";
+    case 20:
+      return "#1d1b1c";
+    case 132:
+      return "#ffd148";
+    case 136:
+      return "#3c5b5d";
     default:
       break;
   }

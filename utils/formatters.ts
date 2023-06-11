@@ -17,3 +17,10 @@ export function convertDateFormat(dateString: string): string {
   });
   return `${formattedDate}, ${formattedTime}`;
 }
+
+export function formatNumber(num: number): string {
+  const parts = num.toString().split('.');
+  const wholePart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const formattedNum = parts.length > 1 ? `${wholePart}.${parts[1]}` : wholePart;
+  return formattedNum;
+}

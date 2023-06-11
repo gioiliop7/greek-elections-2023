@@ -1,7 +1,8 @@
 import { ParliamentParty, GeneralData } from "@/utils/types";
-import { formatPercentage } from "@/utils/formatters";
+import { formatPercentage, formatNumber } from "@/utils/formatters";
 import { getPartyLogo } from "@/utils/parties";
 import Image from "next/image";
+import Copyright from "../Copyright/Copyright";
 
 import parliament from "../../assets/images/parliament.svg";
 
@@ -41,20 +42,23 @@ export default function Summary({
         </h2>
         <div className="flex flex-wrap mt-4">
           <p className="w-full md:w-1/2 text-endeavour-700 text-center mb-3">
-            Εγγεγραμμένοι:{generalData.grammenoi}
+            Εγγεγραμμένοι:{formatNumber(generalData.grammenoi)}
           </p>
           <p className="w-full md:w-1/2 text-endeavour-700 text-center">
-            Συμμετοχή:{generalData.participation}{" "}
+            Συμμετοχή:{formatNumber(generalData.participation)}{" "}
             {`(${generalData.percentageOfPartipation}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Έγκυρα:{generalData.egkyra} {`(${generalData.percentageOfEgkyra}%)`}
+            Έγκυρα:{formatNumber(generalData.egkyra)}{" "}
+            {`(${generalData.percentageOfEgkyra}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Λευκά:{generalData.leyka} {`(${generalData.percentageOfLeyka}%)`}
+            Λευκά:{formatNumber(generalData.leyka)}{" "}
+            {`(${generalData.percentageOfLeyka}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Άκυρα:{generalData.akyra} {`(${generalData.percentageOfAkyra}%)`}
+            Άκυρα:{formatNumber(generalData.akyra)}{" "}
+            {`(${generalData.percentageOfAkyra}%)`}
           </p>
         </div>
       </div>
@@ -75,6 +79,7 @@ export default function Summary({
             <p className="text-endeavour-950 text-2xl font-medium">Λοιπά</p>
           </div>
         </div>
+        <Copyright />
       </div>
     </>
   );
