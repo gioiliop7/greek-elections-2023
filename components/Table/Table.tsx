@@ -3,6 +3,7 @@ import { getPartyLogo } from "@/utils/parties";
 import { getDistrictName } from "@/utils/ep";
 
 import Image from "next/image";
+import { ElectionData } from "@/utils/types";
 
 interface Deputy {
   EP_ID: string;
@@ -13,34 +14,11 @@ interface Deputy {
   cand_TvDescr: string;
 }
 
-interface TableProps {
-  data: {
-    deputiesVotes?: {
-      EP_ID: string;
-      party: {
-        [key: string]: {
-          CAND_ID: string;
-          VOTES: number;
-        }[];
-      };
-    };
-    full: {
-      party: {
-        Edres: number;
-        PARTY_ID: number;
-      }[];
-    };
-    deputies: {
-      [key: string]: {
-        [key: string]: {
-          Descr: string;
-        };
-      };
-    };
-  };
-}
+type ElectionPageProps = {
+  data: ElectionData;
+};
 
-export default function Table({ data }: TableProps) {
+export default function Table({ data }: ElectionPageProps): JSX.Element | null {
   let deputies: Deputy[] = [];
   let Rank: boolean;
   let Votes: boolean;
@@ -50,14 +28,14 @@ export default function Table({ data }: TableProps) {
   const [searchValue, setSearchValue] = useState("");
 
   if (!debutiesTrue) {
-    return;
+    return null;
   }
 
   if (debutiesVotes) {
-    const partiesFull = data.full.party;
-    const EP_ID = debutiesVotes.EP_ID;
-    const partiesVotes = debutiesVotes.party;
-    deputies = data.deputies;
+    const partiesFull: any = (data.full as any)?.party;
+    const EP_ID: string = (debutiesVotes as any).EP_ID;
+    const partiesVotes: any = (debutiesVotes as any).party;
+    deputies = data.deputies as Deputy[]; // Add type assertion
     Rank = false;
     Votes = true;
 
@@ -65,9 +43,10 @@ export default function Table({ data }: TableProps) {
 
     for (let key in partiesVotes) {
       if (Array.isArray(partiesVotes[key])) {
-        const party = key; // Store the current key in the `party` variable
+        console.log(key)
+        const party: string = key; // Store the current key in the `party` variable
         const currentArray = partiesVotes[key];
-        currentArray.forEach((vote, index) => {
+        currentArray.forEach((vote: any, index: number) => {
           const objectToRender: Deputy = {
             EP_ID: EP_ID,
             PARTY_ID: parseInt(party),
@@ -76,18 +55,18 @@ export default function Table({ data }: TableProps) {
             seat: false,
             cand_TvDescr: "",
           };
+          const partyInt:number = parseInt(party);
           const candidateID = vote.CAND_ID;
           const candRank = index + 1;
           objectToRender.Rank = candRank;
           objectToRender.seat = partiesFull.some(
-            (element) =>
+            (element: any) =>
               candRank <= element.Edres && element.PARTY_ID === parseInt(party)
           );
 
-          // Retrieve the candidate name from deputies if the key matches the party
-          if (deputies[party] && deputies[party][candidateID]) {
+          if (deputies[partyInt] && deputies[partyInt][candidateID as keyof typeof deputies[typeof partyInt]]) {
             objectToRender.cand_TvDescr =
-              deputies[party][candidateID].Descr || "";
+              (deputies[partyInt][candidateID as keyof typeof deputies[typeof partyInt]] as any).Descr || "";
           }
 
           arrayOfObjects.push(objectToRender);
@@ -101,7 +80,11 @@ export default function Table({ data }: TableProps) {
   } else {
     Rank = true;
     Votes = false;
-    deputies = data.deputies;
+    if (data.deputies && Array.isArray(data.deputies)) {
+      deputies = data.deputies;
+    } else {
+      return null; // or handle the null case according to your requirements
+    }
   }
 
   const deputiesPerPage = 10;
@@ -133,6 +116,8 @@ export default function Table({ data }: TableProps) {
 
   const showPagination =
     filteredDeputies.length > deputiesPerPage && totalPages > 1;
+
+    
 
   return (
     <>
@@ -197,7 +182,7 @@ export default function Table({ data }: TableProps) {
                   >
                     {deputy.cand_TvDescr}
                   </td>
-                  <td className="px-6 py-4">{getDistrictName(deputy.EP_ID)}</td>
+                  <td className="px-6 py-4">{getDistrictName(parseInt(deputy.EP_ID))}</td>
                   <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
                     <Image
                       className="max-w-[40px] mx-auto"

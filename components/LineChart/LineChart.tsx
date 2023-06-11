@@ -38,7 +38,7 @@ function PieChart({ data }: ElectionPageProps) {
             total: {
               show: true,
               label: 'Συμμετοχή',
-              formatter: function (w) {
+              formatter: function () {
                 // By default, this function returns the average of all series. The below is just an example to show the use of a custom formatter function
                 return participation;
               },

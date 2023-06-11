@@ -26,7 +26,7 @@ function ColumnChart({ data, countries }: ElectionPageProps) {
       .filter((party: PartyType) => party.Edres > 0)
       .map((party: PartyType) => ({
         name: getPartyName(party.PARTY_ID),
-        data: [formatPercentage(party.Perc)],
+        data: [(formatPercentage(party.Perc)) as any],
         color: getPartyColor(party.PARTY_ID),
       }));
   } else {
