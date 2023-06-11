@@ -45,8 +45,13 @@ export default function Table({ data }: TableProps) {
   let Rank: boolean;
   let Votes: boolean;
   const debutiesVotes = data.deputiesVotes;
+  const debutiesTrue = data.deputies;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
+
+  if (!debutiesTrue) {
+    return;
+  }
 
   if (debutiesVotes) {
     const partiesFull = data.full.party;
@@ -100,7 +105,8 @@ export default function Table({ data }: TableProps) {
   }
 
   const deputiesPerPage = 10;
-  const totalPages = Math.ceil(deputies.length / deputiesPerPage);
+  const totalPages =
+    deputies.length > 0 ? Math.ceil(deputies.length / deputiesPerPage) : 0;
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -135,7 +141,7 @@ export default function Table({ data }: TableProps) {
           <div className="flex items-center justify-end my-4 mx-2">
             <input
               type="text"
-              placeholder="Search by name"
+              placeholder="Αναζήτηση με όνομα"
               value={searchValue}
               onChange={handleSearchChange}
               className="px-2 py-1 rounded-md bg-gray-200 text-gray-800"

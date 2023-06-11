@@ -1,6 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { ElectionData, FullData, Statistics } from "@/utils/types";
+import { ElectionData, FullData } from "@/utils/types";
+import { convertDateFormat } from "@/utils/formatters";
 
 const Percentage = dynamic(() => import("../Percentage/Percentage"), {
   ssr: false,
@@ -9,25 +10,44 @@ const Percentage = dynamic(() => import("../Percentage/Percentage"), {
 export default function BlueBar({
   ep,
   setEp,
+  setCountries,
   name,
   data,
+  countries,
+  setCountryID,
+  countryID
 }: {
   ep: number;
+  countryID: number;
   name: String;
   setEp: React.Dispatch<React.SetStateAction<number>>;
+  setCountryID: React.Dispatch<React.SetStateAction<number>>;
   setEpName: React.Dispatch<React.SetStateAction<string>>;
+  setCountries: React.Dispatch<React.SetStateAction<boolean>>;
   data: ElectionData;
+  countries: Boolean;
 }) {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEp = parseInt(event.target.value);
+    if (selectedEp == 57) {
+      setCountries(true);
+      setCountryID(24);
+    } else {
+      setCountries(false);
+      setCountryID(0)
+    }
     setEp(selectedEp);
+  };
+  const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCountryID = parseInt(event.target.value);
+    setCountryID(selectedCountryID);
   };
   const full = data.full as FullData;
   const updatedAt = full.Updated;
 
   return (
     <>
-      <div className="w-full bg-[#0055a0] text-white  h-100 flex justify-between p-5">
+      <div className="w-full bg-[#0055a0] text-white  h-100 flex flex-col xl:flex-row items-center justify-between p-5">
         <h2 className="text-2xl font-medium text-white">Εκλογές 2023</h2>
         <select
           onChange={handleSelectChange}
@@ -96,14 +116,58 @@ export default function BlueBar({
           <option value="49">Χίου</option>
           <option value="57">Εξωτερικού</option>
         </select>
+        {countries && (
+          <>
+            <select
+              id="countrySelect"
+              onChange={handleCountryChange}
+              className=" text-black w-40 md:w-48 lg:w-64 p-1 bg-white border-2 border-primary hover:border-primary-light focus:border-primary-light rounded outline-none"
+            >
+              <option value="24">Αυστρία</option>
+              <option value="28">Βέλγιο</option>
+              <option value="35">Βουλγαρία</option>
+              <option value="39">Γαλλία</option>
+              <option value="42">Γερμανία</option>
+              <option value="57">Δανία</option>
+              <option value="63">Ελβετία</option>
+              <option value="70">Ηνωμένο Βασίλειο</option>
+              <option value="78">Ιρλανδία</option>
+              <option value="82">Ισπανία</option>
+              <option value="84">Ιταλία</option>
+              <option value="104">Κύπρος</option>
+              <option value="114">Λιθουανία</option>
+              <option value="116">Λουξεμβούργο</option>
+              <option value="123">Μάλτα</option>
+              <option value="170">Νορβηγία</option>
+              <option value="173">Ολλανδία</option>
+              <option value="177">Ουγγαρία</option>
+              <option value="191">Πολωνία</option>
+              <option value="192">Πορτογαλία</option>
+              <option value="197">Ρουμανία</option>
+              <option value="213">Σουηδία</option>
+              <option value="232">Τσεχία</option>
+              <option value="236">Φινλανδία</option>
+              <option value="71">ΗΠΑ</option>
+              <option value="88">Καναδάς</option>
+              <option value="69">Ηνωμένα Αραβικά Εμιράτα</option>
+              <option value="89">Κατάρ</option>
+              <option value="98">Κορέα</option>
+              <option value="202">Σαουδική Αραβία</option>
+              <option value="206">Σιγκαπούρη</option>
+              <option value="228">Τουρκία</option>
+              <option value="10">Αίγυπτος</option>
+              <option value="171">Νότια Αφρική</option>
+              <option value="23">Αυστραλία</option>
+            </select>
+          </>
+        )}
       </div>
-      <div className="w-full bg-white border-b-blue-950 border text-[#0055a0] h-100 flex justify-between p-5">
+      <div className="w-full bg-white border-b-blue-950 border text-[#0055a0] h-100 flex flex-col xl:flex-row items-center justify-between p-5">
         <div>
           <p className="text-2xl font-medium my-3">{name}</p>
           <h4 className="text-md">Τελευταία ενημέρωση</h4>
-          <p className="text-sm font-bold">{updatedAt}</p>
+          <p className="text-sm font-bold">{convertDateFormat(updatedAt)}</p>
         </div>
-
         <Percentage data={data} />
       </div>
     </>

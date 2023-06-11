@@ -2,7 +2,13 @@ import { ElectionData } from "@/utils/types";
 import Table from "@/components/Table/Table";
 import dynamic from "next/dynamic";
 
-export default function DataComponent({ data }: { data: ElectionData }) {
+export default function DataComponent({
+  data,
+  countries,
+}: {
+  data: ElectionData;
+  countries: Boolean;
+}) {
   const ColumnChart = dynamic(() => import("../ColumnChart/ColumnChart"), {
     ssr: false,
   });
@@ -14,19 +20,22 @@ export default function DataComponent({ data }: { data: ElectionData }) {
   });
   return (
     <>
-      <div className="flex flex-col lg:flex-row w-full max-w-[90%] mx-auto">
-        <div className="w-2/3">
-          <ColumnChart data={data} />
+      <div className="flex flex-col xl:flex-row w-full max-w-[90%] mx-auto">
+        <div className="w-full lg:w-2/3">
+          <ColumnChart data={data} countries={countries} />
         </div>
-        <div className="w-1/3">
+        <div className="w-full xl:w-1/3 flex flex-col items-center gap-4">
           <PieChart data={data} />
           <LineChart data={data} />
         </div>
       </div>
-
-      <div className="py-8">
-        <Table data={data} />
-      </div>
+      {!countries && (
+        <>
+          <div className="py-8">
+            <Table data={data} />
+          </div>
+        </>
+      )}
     </>
   );
 }

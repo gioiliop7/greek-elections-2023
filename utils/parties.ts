@@ -175,6 +175,58 @@ export function getPartyColor(id: number) {
       return "#c15127";
     case 123:
       return "#ad2e89";
+    case 135:
+      return "#58aafe";
+    case 60:
+      return "#ef8c19";
+    case 128:
+      return "#d0d0d0";
+    case 28:
+      return "#509e2f";
+    case 129:
+      return "#551225";
+    case 44:
+      return "#bf1a20";
+    case 140:
+      return "#375b7b";
+    case 15:
+      return "#fa6608";
+    case 138:
+      return "#d0ecf6";
+    case 130:
+      return "#333333";
+    case 142:
+      return "#ef7c67";
+    case 141:
+      return "#1f9b58";
+    case 134:
+      return "#023f7e";
+    case 125:
+      return "#b20000";
+    case 113:
+      return "#007cc2";
+    case 54:
+      return "#6bc190";
+    case 143:
+      return "#e76a82";
+    case 137:
+      return "#000";
+    case 85:
+      return "#f5da6b";
+    case 133:
+      return "#a38d7d";
+    case 10:
+      return "#d71920";
+    case 66:
+      return "#000";
+    case 10:
+      return "#d71920";
+    case 139:
+      return "#ee47ae";
+    case 11:
+      return "#000";
+    case 998:
+      return "#000";
     default:
       break;
   }

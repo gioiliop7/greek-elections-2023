@@ -8,24 +8,36 @@ interface PartyType {
   PARTY_ID: number;
   Edres: number;
   Perc: number;
+  VOTES: number;
   // Add more properties as needed
 }
 
 type ElectionPageProps = {
   data: ElectionData;
+  countries: Boolean;
 };
 
-function ColumnChart({ data }: ElectionPageProps) {
+function ColumnChart({ data, countries }: ElectionPageProps) {
   const full = data.full as FullData;
   const parties = full.party;
-
-  const chartData = parties
-    .filter((party: PartyType) => party.Edres > 0)
-    .map((party: PartyType) => ({
+  let chartData;
+  if (!countries) {
+    chartData = parties
+      .filter((party: PartyType) => party.Edres > 0)
+      .map((party: PartyType) => ({
+        name: getPartyName(party.PARTY_ID),
+        data: [formatPercentage(party.Perc)],
+        color: getPartyColor(party.PARTY_ID),
+      }));
+  } else {
+    chartData = parties.map((party: PartyType) => ({
       name: getPartyName(party.PARTY_ID),
-      data: [formatPercentage(party.Perc)],
-      color: getPartyColor(party.PARTY_ID),
+      data: [party.VOTES],
+      color: getPartyColor(party.PARTY_ID)
+        ? getPartyColor(party.PARTY_ID)
+        : "#000",
     }));
+  }
 
   const [series, setSeries] = useState(chartData);
 

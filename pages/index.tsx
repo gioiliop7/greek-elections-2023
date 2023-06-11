@@ -6,7 +6,7 @@ import BlueBar from "@/components/BlueBar/BlueBar";
 import DataComponent from "@/components/DataComponent/DataComponent";
 
 import { calculatePercentage } from "@/utils/helpers";
-import { fetchData } from "@/utils/fetchdata";
+import { fetchCountries, fetchData } from "@/utils/fetchdata";
 
 import {
   Statistics,
@@ -18,6 +18,7 @@ import {
 
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
+import { count } from "console";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetchData();
@@ -31,16 +32,17 @@ type ElectionPageProps = {
 };
 
 export default function Home({ data }: ElectionPageProps) {
-  const [initialData, setInitialData] = useState(data);
-  const [ep, setEp] = useState(99999);
-
   const statistics = data.stats as Statistics;
-  const [epName, setEpName] = useState(statistics.Descr);
   const full = data.full as FullData;
   const parties = full?.party as Party[];
   const parliamentParties: ParliamentParty[] = [];
-  // console.log(statistics);
-  //TODO ΕΚΛΟΓΙΚΑ ΤΜΗΜΑΤΑ ΟΤΑΝ ΒΓΕΙ Η ΠΛΑΤΦΟΡΜΑ ΓΙΑΤΙ ΔΕΝ ΚΑΤΑΛΑΒΑΙΝΩ ΤΙΣ ΜΕΤΑΒΛΗΤΕΣ.
+
+  const [initialData, setInitialData] = useState(data);
+  const [ep, setEp] = useState(99999);
+  const [epName, setEpName] = useState(statistics.Descr);
+  const [countries, setCountries] = useState(false);
+  const [countryID, setCountryID] = useState(0);
+
   const eklogikaTmhmataCounter = statistics?.CountTm;
   const edresEpikrateias = statistics?.Edres;
   const akyra = full?.Akyra;
@@ -92,36 +94,70 @@ export default function Home({ data }: ElectionPageProps) {
     }
   );
 
+  // console.log(countries);
+  // console.log(countryID);
+  // console.log(ep);
+
   useEffect(() => {
+    console.log(ep);
+    console.log(countryID);
+
     const fetchDataAsync = async () => {
-      const data = await fetchData(ep);
-      const stats = data.stats as Statistics;
-      const name = stats.Descr;
-      setEpName(name);
-      setInitialData(data);
+      try {
+        let data;
+        if (ep !== 57) {
+          data = await fetchData(ep);
+        } else {
+          data = await fetchCountries(countryID);
+        }
+
+        const stats = data.stats as Statistics;
+        if (stats) {
+          const name = stats.Descr;
+          setEpName(name);
+          setInitialData(data);
+        }
+      } catch (error) {
+        console.log("Error:", error);
+      }
     };
 
     fetchDataAsync();
-  }, [ep]);
+  }, [ep, countryID]);
+
+  // useEffect(() => {
+  //   if (countryID !== 0) {
+  //     console.log("running c");
+
+  //   } else {
+  //     return;
+  //   }
+  // }, [countryID, ep]);
+
+  console.log(initialData);
 
   return (
     <>
       <Header />
       <div>
         <div className="flex flex-col lg:flex-row w-full">
-          <div className="w-3/5 bg-endeavour-50 h-screen">
+          <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-screen">
             <BlueBar
               ep={ep}
               setEp={setEp}
               setEpName={setEpName}
+              countries={countries}
+              setCountries={setCountries}
+              setCountryID={setCountryID}
+              countryID={countryID}
               name={epName}
-              data={initialData} 
+              data={initialData}
             />
             <div className="overflow-y-auto h-[75%] py-12">
-              <DataComponent data={initialData} />
+              <DataComponent data={initialData} countries={countries} />
             </div>
           </div>
-          <div className="w-2/5 bg-endeavour-100 h-screen">
+          <div className="w-full lg:w-2/5 bg-endeavour-100 lg:h-screen py-0 sm:py-10">
             <Summary generalData={generalData} parties={parliamentParties} />
           </div>
         </div>
