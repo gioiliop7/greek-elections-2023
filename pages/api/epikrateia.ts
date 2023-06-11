@@ -22,8 +22,8 @@ export default async function handler(
     return;
   }
 
-  if (!type || (type !== 'stats' && type !== 'full')) {
-    res.status(400).json({ error: 'Invalid Request Type' });
+  if (!type || (type !== "stats" && type !== "full")) {
+    res.status(400).json({ error: "Invalid Request Type" });
     return;
   }
 
@@ -33,7 +33,13 @@ export default async function handler(
       : "https://ekloges.ypes.gr/current/dyn1/v/epik_1.js";
 
   try {
-    const response = await fetch(url);
+    const requestOptions = {
+      headers: {
+        accept: "application/json, text/plain, */*",
+        "accept-language": "el-GR,el;q=0.9,en;q=0.8",
+      },
+    };
+    const response = await fetch(url,requestOptions);
     console.log(response);
     const data = await response.json();
     res.status(200).json(data);
