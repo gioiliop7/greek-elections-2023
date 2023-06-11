@@ -40,7 +40,6 @@ export default async function handler(
         accept: "application/json, text/plain, */*",
         "accept-language": "el-GR,el;q=0.9,en;q=0.8",
         "cache-control": "no-cache",
-        cookie: "_ga=GA1.2.223126820.1679741516; .Elections.Culture=el",
         pragma: "no-cache",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
