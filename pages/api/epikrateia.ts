@@ -34,6 +34,7 @@ export default async function handler(
 
   try {
     const response = await fetch(url);
+    console.log(response);
     const data = await response.json();
     res.status(200).json(data);
   } catch (error: unknown) {
