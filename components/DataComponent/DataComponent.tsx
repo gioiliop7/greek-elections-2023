@@ -21,7 +21,7 @@ export default function DataComponent({
   return (
     <>
       <div className="flex flex-col xl:flex-row w-full max-w-[90%] mx-auto">
-        <div className="w-full lg:w-2/3">
+        <div className="w-full lg:w-2/3 px-20 md:px-0">
           <ColumnChart data={data} countries={countries} />
         </div>
         <div className="w-full xl:w-1/3 flex flex-col items-center gap-4">
@@ -31,7 +31,7 @@ export default function DataComponent({
       </div>
       {!countries && (
         <>
-          <div className="py-8">
+          <div className="py-8 max-w-[50%] md:max-w-full mx-auto">
             <Table data={data} />
           </div>
         </>

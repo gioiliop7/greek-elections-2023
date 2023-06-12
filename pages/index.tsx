@@ -18,7 +18,6 @@ import {
 
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import { count } from "console";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetchData();
