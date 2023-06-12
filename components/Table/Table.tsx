@@ -43,7 +43,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
 
     for (let key in partiesVotes) {
       if (Array.isArray(partiesVotes[key])) {
-        console.log(key)
+        console.log(key);
         const party: string = key; // Store the current key in the `party` variable
         const currentArray = partiesVotes[key];
         currentArray.forEach((vote: any, index: number) => {
@@ -55,7 +55,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
             seat: false,
             cand_TvDescr: "",
           };
-          const partyInt:number = parseInt(party);
+          const partyInt: number = parseInt(party);
           const candidateID = vote.CAND_ID;
           const candRank = index + 1;
           objectToRender.Rank = candRank;
@@ -64,9 +64,18 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               candRank <= element.Edres && element.PARTY_ID === parseInt(party)
           );
 
-          if (deputies[partyInt] && deputies[partyInt][candidateID as keyof typeof deputies[typeof partyInt]]) {
+          if (
+            deputies[partyInt] &&
+            deputies[partyInt][
+              candidateID as keyof (typeof deputies)[typeof partyInt]
+            ]
+          ) {
             objectToRender.cand_TvDescr =
-              (deputies[partyInt][candidateID as keyof typeof deputies[typeof partyInt]] as any).Descr || "";
+              (
+                deputies[partyInt][
+                  candidateID as keyof (typeof deputies)[typeof partyInt]
+                ] as any
+              ).Descr || "";
           }
 
           arrayOfObjects.push(objectToRender);
@@ -88,8 +97,6 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
   }
 
   const deputiesPerPage = 10;
-  const totalPages =
-    deputies.length > 0 ? Math.ceil(deputies.length / deputiesPerPage) : 0;
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -104,6 +111,11 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
     deputy.cand_TvDescr.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const totalPages =
+    filteredDeputies.length > 0
+      ? Math.ceil(filteredDeputies.length / deputiesPerPage)
+      : 0;
+
   const startDeputyIndex = (currentPage - 1) * deputiesPerPage;
   const endDeputyIndex = Math.min(
     startDeputyIndex + deputiesPerPage,
@@ -116,8 +128,6 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
 
   const showPagination =
     filteredDeputies.length > deputiesPerPage && totalPages > 1;
-
-    
 
   return (
     <>
@@ -136,19 +146,13 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
             {/* Table headers */}
             <thead className="text-xs text-gray-700 uppercase">
               <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 bg-gray-50"
-                >
+                <th scope="col" className="px-6 py-3 bg-gray-50">
                   Ονοματεπώνυμο
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Εκλογική Περιφέρεια
                 </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 bg-gray-50"
-                >
+                <th scope="col" className="px-6 py-3 bg-gray-50">
                   Συνδυασμός
                 </th>
                 {Rank && (
@@ -171,10 +175,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
             {/* Table body */}
             <tbody>
               {currentDeputies.map((deputy, index) => (
-                <tr
-                  key={index}
-                  className="border-b border-gray-200"
-                >
+                <tr key={index} className="border-b border-gray-200">
                   <td
                     className={`${
                       deputy.seat ? "font-bold" : ""
@@ -182,7 +183,9 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
                   >
                     {deputy.cand_TvDescr}
                   </td>
-                  <td className="px-6 py-4">{getDistrictName(parseInt(deputy.EP_ID))}</td>
+                  <td className="px-6 py-4">
+                    {getDistrictName(parseInt(deputy.EP_ID))}
+                  </td>
                   <td className="px-6 py-4 bg-gray-50">
                     <Image
                       className="max-w-[40px] mx-auto"
@@ -204,8 +207,22 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
                   )}
                 </tr>
               ))}
+              {currentDeputies.length == 0 && (
+                <>
+                  <td colSpan={5} className="px-6 py-4 h-[50px] text-center">
+                    Δεν υπάρχει όνομα με αυτό τον όρο αναζήτησης
+                  </td>
+                </>
+              )}
             </tbody>
           </table>
+          {totalPages > 1 && (
+            <>
+              <p className="text-endeavour-800 absolute bottom-5 left-5">
+                {currentPage} απο {totalPages} σελίδες
+              </p>
+            </>
+          )}
 
           {/* Pagination */}
           {showPagination && (
