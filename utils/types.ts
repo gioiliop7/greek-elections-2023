@@ -106,3 +106,12 @@ export type District = {
   id: number;
   name: string;
 };
+
+export interface Deputy {
+  EP_ID: string;
+  PARTY_ID: number;
+  VOTES: number;
+  Rank: number;
+  seat: boolean;
+  cand_TvDescr: string;
+}

@@ -3,16 +3,7 @@ import { getPartyLogo } from "@/utils/parties";
 import { getDistrictName } from "@/utils/ep";
 
 import Image from "next/image";
-import { ElectionData } from "@/utils/types";
-
-interface Deputy {
-  EP_ID: string;
-  PARTY_ID: number;
-  VOTES: number;
-  Rank: number;
-  seat: boolean;
-  cand_TvDescr: string;
-}
+import { ElectionData, Deputy } from "@/utils/types";
 
 type ElectionPageProps = {
   data: ElectionData;
@@ -142,80 +133,80 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               className="px-2 py-1 rounded-md bg-gray-200 text-gray-800"
             />
           </div>
-            <table className="w-full text-sm text-left text-gray-500">
-              {/* Table headers */}
-              <thead className="text-xs text-gray-700 uppercase">
-                <tr>
-                  <th scope="col" className="px-6 py-3 bg-gray-50">
-                    ΟΝΟΜΑΤΕΠΩΝΥΜΟ
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ
-                  </th>
-                  <th scope="col" className="px-6 py-3 bg-gray-50">
-                    ΣΥΝΔΥΑΣΜΟΣ
-                  </th>
+          <table className="w-full text-sm text-left text-gray-500">
+            {/* Table headers */}
+            <thead className="text-xs text-gray-700 uppercase">
+              <tr>
+                <th scope="col" className="px-6 py-3 bg-gray-50">
+                  ΟΝΟΜΑΤΕΠΩΝΥΜΟ
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ
+                </th>
+                <th scope="col" className="px-6 py-3 bg-gray-50">
+                  ΣΥΝΔΥΑΣΜΟΣ
+                </th>
+                {Rank && (
+                  <>
+                    <th scope="col" className="px-6 py-3">
+                      ΘΕΣΗ
+                    </th>
+                  </>
+                )}
+                {Votes && (
+                  <>
+                    <th scope="col" className="px-6 py-3">
+                      ΨΗΦΟΙ
+                    </th>
+                  </>
+                )}
+              </tr>
+            </thead>
+
+            {/* Table body */}
+            <tbody>
+              {currentDeputies.map((deputy, index) => (
+                <tr key={index} className="border-b border-gray-200">
+                  <td
+                    className={`${
+                      deputy.seat ? "font-bold" : ""
+                    } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50`}
+                  >
+                    {deputy.cand_TvDescr}
+                  </td>
+                  <td className="px-6 py-4">
+                    {getDistrictName(parseInt(deputy.EP_ID))}
+                  </td>
+                  <td className="px-6 py-4 bg-gray-50">
+                    <Image
+                      className="max-w-[40px] mx-auto"
+                      src={getPartyLogo(deputy.PARTY_ID)}
+                      alt={deputy.PARTY_ID.toString()}
+                      width={40}
+                      height={40}
+                    />
+                  </td>
                   {Rank && (
                     <>
-                      <th scope="col" className="px-6 py-3">
-                        ΘΕΣΗ
-                      </th>
+                      <td className="px-6 py-4">{deputy.Rank}</td>
                     </>
                   )}
                   {Votes && (
                     <>
-                      <th scope="col" className="px-6 py-3">
-                        ΨΗΦΟΙ
-                      </th>
+                      <td className="px-6 py-4">{deputy.VOTES}</td>
                     </>
                   )}
                 </tr>
-              </thead>
-
-              {/* Table body */}
-              <tbody>
-                {currentDeputies.map((deputy, index) => (
-                  <tr key={index} className="border-b border-gray-200">
-                    <td
-                      className={`${
-                        deputy.seat ? "font-bold" : ""
-                      } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50`}
-                    >
-                      {deputy.cand_TvDescr}
-                    </td>
-                    <td className="px-6 py-4">
-                      {getDistrictName(parseInt(deputy.EP_ID))}
-                    </td>
-                    <td className="px-6 py-4 bg-gray-50">
-                      <Image
-                        className="max-w-[40px] mx-auto"
-                        src={getPartyLogo(deputy.PARTY_ID)}
-                        alt={deputy.PARTY_ID.toString()}
-                        width={40}
-                        height={40}
-                      />
-                    </td>
-                    {Rank && (
-                      <>
-                        <td className="px-6 py-4">{deputy.Rank}</td>
-                      </>
-                    )}
-                    {Votes && (
-                      <>
-                        <td className="px-6 py-4">{deputy.VOTES}</td>
-                      </>
-                    )}
-                  </tr>
-                ))}
-                {currentDeputies.length == 0 && (
-                  <>
-                    <td colSpan={5} className="px-6 py-4 h-[50px] text-center">
-                      Δεν υπάρχει όνομα με αυτό τον όρο αναζήτησης
-                    </td>
-                  </>
-                )}
-              </tbody>
-            </table>
+              ))}
+              {currentDeputies.length == 0 && (
+                <>
+                  <td colSpan={5} className="px-6 py-4 h-[50px] text-center">
+                    Δεν υπάρχει όνομα με αυτό τον όρο αναζήτησης
+                  </td>
+                </>
+              )}
+            </tbody>
+          </table>
           {totalPages > 1 && (
             <>
               <p className="text-endeavour-800 absolute bottom-5 left-5">
