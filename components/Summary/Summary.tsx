@@ -42,22 +42,22 @@ export default function Summary({
         </h2>
         <div className="flex flex-wrap mt-4">
           <p className="w-full md:w-1/2 text-endeavour-700 text-center mb-3">
-            Εγγεγραμμένοι:{formatNumber(generalData.grammenoi)}
+            Εγγεγραμμένοι: {formatNumber(generalData.grammenoi)}
           </p>
           <p className="w-full md:w-1/2 text-endeavour-700 text-center">
-            Συμμετοχή:{formatNumber(generalData.participation)}{" "}
+            Συμμετοχή: {formatNumber(generalData.participation)}{" "}
             {`(${generalData.percentageOfPartipation}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Έγκυρα:{formatNumber(generalData.egkyra)}{" "}
+            Έγκυρα: {formatNumber(generalData.egkyra)}{" "}
             {`(${generalData.percentageOfEgkyra}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Λευκά:{formatNumber(generalData.leyka)}{" "}
+            Λευκά: {formatNumber(generalData.leyka)}{" "}
             {`(${generalData.percentageOfLeyka}%)`}
           </p>
           <p className="w-full md:w-1/3 text-endeavour-700 text-center">
-            Άκυρα:{formatNumber(generalData.akyra)}{" "}
+            Άκυρα: {formatNumber(generalData.akyra)}{" "}
             {`(${generalData.percentageOfAkyra}%)`}
           </p>
         </div>

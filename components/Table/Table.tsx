@@ -132,7 +132,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
   return (
     <>
       <div className="w-full text-white h-100 flex justify-center">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-endeavour-100">
           <div className="flex items-center justify-end my-4 mx-2">
             <input
               type="text"
@@ -142,30 +142,30 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               className="px-2 py-1 rounded-md bg-gray-200 text-gray-800"
             />
           </div>
-          <table className="w-full text-sm text-left text-gray-500 ">
+          <table className="w-full text-sm text-left text-gray-500">
             {/* Table headers */}
             <thead className="text-xs text-gray-700 uppercase">
               <tr>
                 <th scope="col" className="px-6 py-3 bg-gray-50">
-                  Ονοματεπώνυμο
+                  ΟΝΟΜΑΤΕΠΩΝΥΜΟ
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Εκλογική Περιφέρεια
+                  ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ
                 </th>
                 <th scope="col" className="px-6 py-3 bg-gray-50">
-                  Συνδυασμός
+                  ΣΥΝΔΥΑΣΜΟΣ
                 </th>
                 {Rank && (
                   <>
                     <th scope="col" className="px-6 py-3">
-                      Θέση
+                      ΘΕΣΗ
                     </th>
                   </>
                 )}
                 {Votes && (
                   <>
                     <th scope="col" className="px-6 py-3">
-                      Ψήφοι
+                      ΨΗΦΟΙ
                     </th>
                   </>
                 )}
@@ -219,7 +219,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
           {totalPages > 1 && (
             <>
               <p className="text-endeavour-800 absolute bottom-5 left-5">
-                {currentPage} απο {totalPages} σελίδες
+                {currentPage} από {totalPages} σελίδες
               </p>
             </>
           )}
