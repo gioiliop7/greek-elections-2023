@@ -45,3 +45,7 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #888; 
 }
+
+.swagger-ui{
+  width:100%
+}

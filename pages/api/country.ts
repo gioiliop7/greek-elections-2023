@@ -47,7 +47,7 @@ export default async function handler(
     }
     const data = await response.json();
     if (data.length == 0) {
-      res.status(500).json({ error: "Data Not found" });
+      res.status(404).json({ error: "Data Not found" });
       return
     }
     res.status(200).json(data);

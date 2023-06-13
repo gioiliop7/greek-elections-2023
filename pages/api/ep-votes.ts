@@ -34,7 +34,7 @@ export default async function handler(
     }
     const data = await response.json();
     if (party) {
-      res.status(200).json(data.party["2"]);
+      res.status(200).json(data.party[`${party}`]);
       return;
     }
     res.status(200).json(data);

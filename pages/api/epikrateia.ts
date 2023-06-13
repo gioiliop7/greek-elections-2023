@@ -38,7 +38,6 @@ export default async function handler(
     const data = await response.json();
     res.status(200).json(data);
   } catch (error: unknown) {
-    console.log(error);
     if (typeof error === "object" && error !== null && "status" in error) {
       const { status, message } = error as { status: number; message: string };
       res.status(status || 500).json({ error: message });
