@@ -9,7 +9,6 @@ interface PartyType {
   Edres: number;
   Perc: number;
   VOTES: number;
-  // Add more properties as needed
 }
 
 type ElectionPageProps = {

@@ -18,7 +18,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
-  if (!debutiesTrue) {
+  if (!debutiesTrue || Object.keys(debutiesTrue).length === 0) {
     return null;
   }
 
@@ -34,7 +34,6 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
 
     for (let key in partiesVotes) {
       if (Array.isArray(partiesVotes[key])) {
-        console.log(key);
         const party: string = key; // Store the current key in the `party` variable
         const currentArray = partiesVotes[key];
         currentArray.forEach((vote: any, index: number) => {

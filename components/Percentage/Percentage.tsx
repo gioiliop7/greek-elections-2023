@@ -13,7 +13,10 @@ function Percentage({ data }: ElectionPageProps) {
   const stats = data.stats as Statistics;
   const countTm = stats.CountTm;
   const NumTm = full.NumTm;
-  const percentage = calculatePercentage(countTm,NumTm)
+  let percentage = calculatePercentage(countTm,NumTm)
+  if(percentage == Infinity){
+    percentage = 0;
+  }
   const [series ] = useState([percentage]);
 
   const [options] = useState<any>({

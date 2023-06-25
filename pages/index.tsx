@@ -1,5 +1,3 @@
-import styles from "@/styles/Home.module.css";
-
 import Header from "@/components/Header/Header";
 import Summary from "@/components/Summary/Summary";
 import BlueBar from "@/components/BlueBar/BlueBar";
@@ -18,6 +16,7 @@ import {
 
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
+import VideoPlayer from "@/components/Video/Video";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetchData();
@@ -93,7 +92,6 @@ export default function Home({ data }: ElectionPageProps) {
     }
   );
   useEffect(() => {
-
     const fetchDataAsync = async () => {
       try {
         let data;
@@ -120,27 +118,26 @@ export default function Home({ data }: ElectionPageProps) {
   return (
     <>
       <Header />
-      <div>
-        <div className="flex flex-col lg:flex-row w-full">
-          <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-[110vh]">
-            <BlueBar
-              ep={ep}
-              setEp={setEp}
-              setEpName={setEpName}
-              countries={countries}
-              setCountries={setCountries}
-              setCountryID={setCountryID}
-              countryID={countryID}
-              name={epName}
-              data={initialData}
-            />
-            <div className="overflow-y-auto h-[75%] py-12">
-              <DataComponent data={initialData} countries={countries} />
-            </div>
+      <div className="flex flex-col lg:flex-row w-full relative">
+        <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-[110vh]">
+          <BlueBar
+            ep={ep}
+            setEp={setEp}
+            setEpName={setEpName}
+            countries={countries}
+            setCountries={setCountries}
+            setCountryID={setCountryID}
+            countryID={countryID}
+            name={epName}
+            data={initialData}
+          />
+        <VideoPlayer src={"https://www.ert.gr/webtv/ert/tv/live-glm/ert-news.html"} />
+          <div className="overflow-y-auto h-[75%] py-12">
+            <DataComponent data={initialData} countries={countries} />
           </div>
-          <div className="w-full lg:w-2/5 bg-endeavour-100 lg:min-h-screen py-0 sm:py-5">
-            <Summary generalData={generalData} parties={parliamentParties} />
-          </div>
+        </div>
+        <div className="w-full lg:w-2/5 bg-endeavour-100 lg:min-h-screen py-0 sm:py-5">
+          <Summary generalData={generalData} parties={parliamentParties} />
         </div>
       </div>
     </>
