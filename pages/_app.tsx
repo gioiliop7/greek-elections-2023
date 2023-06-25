@@ -47,7 +47,7 @@ const noir = localFont({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"/>
+    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-BC3H9SKYFD"/>
     <Script
       id='google-analytics'
       strategy="afterInteractive"
