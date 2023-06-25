@@ -35,6 +35,17 @@ import social from "../assets/images/social.png";
 import tolma from "../assets/images/tolma.png";
 import kinimaftoxon from "../assets/images/kinimaftoxon.png";
 import domi from "../assets/images/domi.png";
+import foni_logikis from "../assets/images/foni-logikis.png";
+import ethnikoMetopo from "../assets/images/em.png";
+import eu from "../assets/images/eu.png";
+import laiko_evropaiko from "../assets/images/lek.png";
+import oramaellados from "../assets/images/oramaellados.png";
+import panathinaikoKinima from "../assets/images/pao.png";
+import psifiakosEllinismos from "../assets/images/pe.png";
+import prasinoMov from "../assets/images/prasinomov.png";
+import patriotikos from "../assets/images/ps.png";
+import spartiates from "../assets/images/y157.png";
+import tramp from "../assets/images/tramp.png";
 
 import { PartyNames } from "./types";
 
@@ -110,6 +121,29 @@ export function getPartyLogo(id: number) {
       return orama;
     case 20:
       return ellines_oikologoi;
+    case 158:
+      return foni_logikis;
+    case 157:
+      return spartiates;
+    case 65:
+      return panathinaikoKinima;
+    case 156:
+      return tramp;
+    case 78:
+      return ethnikoMetopo;
+    case 151:
+      return laiko_evropaiko;
+    case 152:
+      return oramaellados;
+    case 150:
+      return eu;
+    case 155:
+      return prasinoMov;
+    case 153:
+      return patriotikos;
+    case 159:
+      return psifiakosEllinismos;
+
     default:
       break;
   }
@@ -153,6 +187,17 @@ export function getPartyName(id: number) {
     132: "ΕΛΛΗΝΙΚΟ ΟΡΑΜΑ",
     20: "Δημοσθένης Βεργής ΕΛΛΗΝΕΣ ΟΙΚΟΛΟΓΟΙ",
     998: "Ανεξάρτητοι/Μεμονωμένοι Υποψήφιοι",
+    158: "ΦΩΝΗ ΛΟΓΙΚΗΣ ΑΦΡΟΔΙΤΗ ΛΑΤΙΝΟΠΟΥΛΟΥ",
+    65: "ΠΑΝΑΘΗΝΑΪΚΟ ΚΙΝΗΜΑ",
+    156: "Ρεπουμπλικανικό Κόμμα Ελλάδας-Τ.Ρ.Α.Μ.Π.",
+    78: "Εθνικό Μέτωπο",
+    157: "ΣΠΑΡΤΙΑΤΕΣ",
+    151: "ΛΑΪΚΟ ΕΥΡΩΠΑΪΚΟ ΚΟΜΜΑ",
+    152: "ΟΡΑΜΑ ΑΝΑΓΕΝΝΗΣΗΣ ΕΛΛΑΔΟΣ",
+    150: "ΕΥ-ΚΙΝΗΣΗ",
+    155: "ΠΡΑΣΙΝΟ ΚΑΙ ΜΩΒ",
+    153: "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+    159: "ΨΗΦΙΑΚΟΣ ΕΛΛΗΝΙΣΜΟΣ ΕΝ ΤΟ ΟΛΟΝ",
   };
   return partyNames[id] || "";
 }
@@ -233,6 +278,28 @@ export function getPartyColor(id: number) {
       return "#ffd148";
     case 136:
       return "#3c5b5d";
+    case 158:
+      return "#020c6a";
+    case 157:
+      return "#e9b55f";
+    case 65:
+      return "#01743d";
+    case 156:
+      return "#1e2d43";
+    case 78:
+      return "#035296";
+    case 151:
+      return "#3cc2d2";
+    case 152:
+      return "#1b75d0";
+    case 150:
+      return "#72c9ba";
+    case 155:
+      return "#5f3886";
+    case 153:
+      return "#425faf";
+    case 159:
+      return "#ffe510";
     default:
       break;
   }
