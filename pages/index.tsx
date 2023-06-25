@@ -119,7 +119,7 @@ export default function Home({ data }: ElectionPageProps) {
     <>
       <Header />
       <div className="flex flex-col lg:flex-row w-full relative">
-        <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-[120vh]">
+        <div className="w-full lg:w-3/5 bg-endeavour-50 lg:h-[140vh]">
           <BlueBar
             ep={ep}
             setEp={setEp}

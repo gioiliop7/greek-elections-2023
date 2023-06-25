@@ -113,5 +113,5 @@ export interface Deputy {
   VOTES: number;
   Rank: number;
   seat: boolean;
-  cand_TvDescr: string;
+  cand_Descr: string;
 }

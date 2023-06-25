@@ -43,7 +43,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
             VOTES: vote.VOTES,
             Rank: index + 1,
             seat: false,
-            cand_TvDescr: "",
+            cand_Descr: "",
           };
           const partyInt: number = parseInt(party);
           const candidateID = vote.CAND_ID;
@@ -60,7 +60,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
               candidateID as keyof (typeof deputies)[typeof partyInt]
             ]
           ) {
-            objectToRender.cand_TvDescr =
+            objectToRender.cand_Descr =
               (
                 deputies[partyInt][
                   candidateID as keyof (typeof deputies)[typeof partyInt]
@@ -98,7 +98,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
   };
 
   const filteredDeputies = deputies.filter((deputy) =>
-    deputy.cand_TvDescr.toLowerCase().includes(searchValue.toLowerCase())
+    deputy.cand_Descr.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const totalPages =
@@ -171,7 +171,7 @@ export default function Table({ data }: ElectionPageProps): JSX.Element | null {
                       deputy.seat ? "font-bold" : ""
                     } px-6 py-4 text-gray-900 whitespace-nowrap bg-gray-50`}
                   >
-                    {deputy.cand_TvDescr}
+                    {deputy.cand_Descr}
                   </td>
                   <td className="px-6 py-4">
                     {getDistrictName(parseInt(deputy.EP_ID))}
