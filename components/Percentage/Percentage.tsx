@@ -13,7 +13,7 @@ function Percentage({ data }: ElectionPageProps) {
   const stats = data.stats as Statistics;
   const countTm = stats.CountTm;
   const NumTm = full.NumTm;
-  let percentage = calculatePercentage(countTm,NumTm)
+  let percentage = calculatePercentage(NumTm,countTm)
   if(percentage == Infinity){
     percentage = 0;
   }
